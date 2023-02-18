@@ -366,7 +366,7 @@ select {
 
   outline: 15px solid white;
 
-  height: 250px;
+  height: 350px;
   border-radius: 20px;
 }
 
@@ -383,7 +383,7 @@ select {
 .venueDetails2 {
   border: 1px solid black;
   border-radius: 20px;
-  height: 248px;
+  height: 348px;
   margin-top: 80px;
 }
 

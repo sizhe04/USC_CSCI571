@@ -2,9 +2,11 @@ const IPInfoAPI = "https://ipinfo.io/?token=b2a289d7dc271c";
 const preGeocodingAPI = "https://maps.googleapis.com/maps/api/geocode/json?";
 const GeocodingAPIKey = "AIzaSyA5LVu15RzCE4j_MNwurYKPivfkl1xe_-Y";
 
-const eventSearchAPI = "http://127.0.0.1:8888/eventSearch";
-const eventSearchAPI_NoSeg = "http://127.0.0.1:8888/eventSearchNoSeg";
-const eventDeatailsAPI = "http://127.0.0.1:8888/eventDetails";
+// const eventSearchAPI = "http://127.0.0.1:8888/eventSearch";
+const eventSearchAPI = "https://wsizhe-hw6.wl.r.appspot.com/eventSearch";
+const eventSearchAPI_NoSeg =
+  "https://wsizhe-hw6.wl.r.appspot.com/eventSearchNoSeg";
+const eventDeatailsAPI = "https://wsizhe-hw6.wl.r.appspot.com/eventDetails";
 
 const googleMapAPI = "https://www.google.com/maps/search/?api=1&";
 
@@ -184,35 +186,46 @@ async function eventDetails(id) {
   //Artists
 
   if ((await responseData._embedded) != undefined) {
-    artistH2.classList.remove("none");
     const t = responseData._embedded.attractions;
-    if (t.length == 1) {
-      const nameOfArt = t[0].name;
-      const artiurl = t[0].url;
-      artist.innerHTML = `<a class="url1" href=${artiurl} target="_blank">${nameOfArt}</a>`;
+    if (t != undefined) {
+      artistH2.classList.remove("none");
+      if (t.length == 1) {
+        const nameOfArt = t[0].name;
+        const artiurl = t[0].url;
+        artist.innerHTML = `<a class="url1" href=${artiurl} target="_blank">${nameOfArt}</a>`;
+      } else {
+        const nameOfArt1 = t[0].name;
+        const nameOfArt2 = t[1].name;
+        const artiurl1 = t[0].url;
+        const artiurl2 = t[1].url;
+        artist.innerHTML =
+          `<a class="url1" href=${artiurl1} target="_blank">${nameOfArt1}</a>` +
+          " | " +
+          `<a class="url2" href=${artiurl2} target="_blank">${nameOfArt2}</a>`;
+      }
     } else {
-      const nameOfArt1 = t[0].name;
-      const nameOfArt2 = t[1].name;
-      const artiurl1 = t[0].url;
-      const artiurl2 = t[1].url;
-      artist.innerHTML =
-        `<a class="url1" href=${artiurl1} target="_blank">${nameOfArt1}</a>` +
-        " | " +
-        `<a class="url2" href=${artiurl2} target="_blank">${nameOfArt2}</a>`;
+      artist.HTML = "";
     }
   }
 
   //pic
   if ((await responseData.seatmap) != undefined) {
-    // picture.classList.remove("none");
+    picture.classList.remove("none");
     const picurl = responseData.seatmap.staticUrl;
     // picH2.src = `<img src=${picurl} alt='seat' class='seatImage' />`;
     picture.src = picurl;
+    console.log(picurl);
+  } else {
+    picture.src = "";
+    picture.classList.add("none");
   }
   //venue
   if ((await responseData._embedded) != undefined) {
     venueH2.classList.remove("none");
     venue.textContent = responseData._embedded.venues[0].name;
+  } else {
+    venueH2.classList.add("none");
+    venue.textContent = "";
   }
 
   //genre]
@@ -225,6 +238,9 @@ async function eventDetails(id) {
       classifications.segment.name +
       " | " +
       classifications.subGenre.name;
+  } else {
+    genreH2.classList.add("none");
+    genre.textContent = "";
   }
 
   //priceRange
@@ -235,6 +251,9 @@ async function eventDetails(id) {
       " - " +
       responseData.priceRanges[0].max +
       "USD";
+  } else {
+    priceRangeH2.classList.add("none");
+    priceRange.textContent = "";
   }
 
   //ticketStatus
@@ -259,6 +278,9 @@ async function eventDetails(id) {
       ticketStatus.textContent = "Rescheduled";
       ticketStatus.classList.add("rescheduled");
     }
+  } else {
+    ticketStatusH2.classList.add("none");
+    ticketStatus.textContent = "";
   }
 
   //buyTicket
@@ -276,6 +298,9 @@ async function eventDetails(id) {
     document
       .querySelector(".showDetailsButton")
       .addEventListener("click", showvenueDetails.bind(null, responseData));
+  } else {
+    buyTicketH2.classList.add("none");
+    buyTicket.innerHTML = "";
   }
 }
 
@@ -296,7 +321,7 @@ async function showvenueDetails(responseData) {
       if ((await responseData._embedded.venues[0]) != undefined) {
         if ((await responseData._embedded.venues[0].url) != undefined) {
           moreevents.href = responseData._embedded.venues[0].url;
-        } else {
+          console.log(responseData._embedded.venues[0].url);
         }
         //image
         if ((await responseData._embedded.venues[0].images) != undefined) {
@@ -539,45 +564,3 @@ autoGetLocation.addEventListener("change", autoDetectLocationHandler);
 clearButton.addEventListener("click", clearHandler);
 
 searchButton.addEventListener("click", submitHandler);
-
-// function sort_temFunction(t) {
-//   return "";
-// }
-// function sort_tem2Function(row1, row2, i, ans) {
-//   const t1 = row1.querySelectorAll("td");
-//   const t2 = row2.querySelectorAll("td");
-
-//   const t1_ = transform(i, t1[i + 2].innerHTML);
-//   const t2_ = transform(i, t2[i + 2].innerHTML);
-//   if (t1_ === t2_) return 0;
-//   else if (t1_ < t2_) return -ans;
-//   else if (t1_ > t2_) return ans;
-// }
-
-// function sortFunction(i) {
-//   const lists = Array.from(sortEle).map(sort_temFunction);
-//   const label = "up";
-//   const isSorted = lists[i] || label;
-//   if (isSorted === label) {
-//     const index = 1;
-//   } else {
-//     const index = -1;
-//   }
-
-//   const data_sort_2 = Array.from(data_sort);
-//   data_sort_2.sort(sort_tem2Function(row1, row2, i, index));
-
-//   [].forEach.call(data_sort, function (row) {
-//     tableBody.clearElements(row);
-//   });
-
-//   data_sort_2.forEach(function (data2) {
-//     tableBody.appendChild(data2);
-//   });
-// }
-
-//click title to sort
-// [].forEach.call(sortEle, function (ele, i) {
-//   const t = sortFunction.bind(null, i);
-//   ele.addEventListener("click", t);
-// });
