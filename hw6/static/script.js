@@ -38,56 +38,6 @@ const alladdressContent = document.querySelector(".alladdress");
 const moreevents = document.querySelector(".moreevents");
 const openInGoogle = document.querySelector(".opengoogle");
 
-async function testfunction() {
-  const inputOfLoc = "1";
-  const GeoApiParams = { address: inputOfLoc, key: GeocodingAPIKey };
-
-  // const geohashLoc = "9q5cs";
-  // const radius = 10;
-  // const segmentId = "KZFzniwnSyZfZ7v7nE";
-  // const keyword = "NewYork";
-  // const response = await axios.get(
-  //   eventSearchAPI +
-  //     "/" +
-  //     geohashLoc +
-  //     "/" +
-  //     radius +
-  //     "/" +
-  //     segmentId +
-  //     "/" +
-  //     keyword
-  // );
-  // console.log(response);
-  // const fetchedData = response.data._embedded.events;
-
-  // const addedData = document.importNode(temTable.content, true);
-  // console.log(addedData.childNodes[1]);
-  // console.log(fetchedData[0]);
-  // console.log(fetchedData[0].name);
-  // const data = fetchedData[0];
-  // let child1 = addedData.childNodes[1];
-  // console.log(child1);
-  // const temDate = child1.querySelector(".tem-date");
-  // const temDate2 = child1.getElementsByClassName("tem-date");
-  // console.log(temDate);
-
-  // console.log(temDate2 === temDate);
-
-  //Date
-
-  // console.log(a);
-  //   const b = [];
-  //   console.log(t);
-  // if (response.data.status === "ZERO_RESULTS") {
-  //   return null;
-  // } else {
-  //   const lat = response.data.results[0].geometry.location.lat;
-  //   const lng = response.data.results[0].geometry.location.lng;
-  //   console.log(lat, lng);
-  // }
-}
-testfunction();
-
 function showTable1() {
   table1.classList.remove("none");
 }
@@ -287,7 +237,7 @@ async function eventDetails(id) {
   if ((await responseData.url) != undefined) {
     buyTicketH2.classList.remove("none");
     const ticktmasturl = responseData.url;
-    buyTicket.innerHTML = `<a href=${ticktmasturl} target="_blank">Ticketmaster</a>`;
+    buyTicket.innerHTML = `<a href=${ticktmasturl} class="ticketmasterurl"target="_blank">Ticketmaster</a>`;
 
     showTable3Header();
     // showvenueDetailsButton.addEventListener(
@@ -388,6 +338,11 @@ async function showvenueDetails(responseData) {
 }
 
 async function submitHandler() {
+  noResult.classList.add("none");
+  hideTable2();
+  hideTable3();
+  hideTable3Header();
+
   const inputOfKeyw = allInput[0].value;
 
   let inputOfDis = "10";
