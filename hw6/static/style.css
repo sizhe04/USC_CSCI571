@@ -17,8 +17,8 @@ body {
 }
 
 #searchForm {
-  background-color: rgba(96, 91, 91, 0.5);
-  backdrop-filter: blur(9px);
+  background-color: rgba(122, 118, 118, 0.4);
+  backdrop-filter: blur(5px);
   /* opacity: 0.9; */
   padding-top: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -32,14 +32,26 @@ body {
 
   border-radius: 15px;
 }
+
+.lineInTheForm {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .bigTitle {
   opacity: 1;
   padding-top: 0;
+  margin-top: 0;
   font-family: Georgia, "Times New Roman", Times, serif;
   font-size: 40px;
   font-weight: 300;
   text-align: center;
   color: white;
+  /* margin-bottom: 60px; */
+}
+
+.keywordlabel {
+  margin-top: 30px;
 }
 
 #header {
@@ -78,6 +90,18 @@ form {
   width: 85%;
 }
 
+/* .formInput {
+  background-color: rgba(122, 118, 118, 0.4);
+  backdrop-filter: blur(5px);
+} */
+
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input {
+  -webkit-text-fill-color: white;
+}
 /* button setting */
 .button {
   opacity: 1;
@@ -100,6 +124,13 @@ form {
 
 .formButton:hover {
   opacity: 0.75;
+}
+
+.norecordsfound {
+  font-size: 60px;
+  margin-top: 100px;
+  color: #969191;
+  text-align: center;
 }
 
 /* setting input */
@@ -410,4 +441,40 @@ a {
 
 .none {
   display: none;
+}
+
+/* hover setting */
+.button:hover {
+  opacity: 0.8;
+}
+
+.tableHead th {
+}
+
+.cansorted {
+  cursor: pointer;
+}
+
+.toTable2:hover {
+  color: purple;
+}
+
+.url1:hover {
+  color: rgb(168, 169, 241);
+}
+
+.url2:hover {
+  color: rgb(168, 169, 241);
+}
+
+.ticketmasterurl:hover {
+  color: rgb(168, 169, 241);
+}
+
+.opengoogle:hover {
+  color: rgb(168, 169, 241);
+}
+
+.moreevents:hover {
+  color: rgb(168, 169, 241);
 }
